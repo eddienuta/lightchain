@@ -32,9 +32,8 @@ const maxTransactionSize = 32768
 // Flow:
 //		1. BeginBlock
 //		2. CheckTx
-//	    3. DeliverTx
-//		4. EndBlock
-//		5. Commit
+//		3. EndBlock
+//		4. Commit -> DeliverTx* -> PersistBlock 
 //		6. CheckTx (clean mempool from TXs not included in committed block)
 //
 // Tendermint runs CheckTx and DeliverTx concurrently with each other,
@@ -132,19 +131,15 @@ func (abci *TendermintABCI) CheckTx(txBytes []byte) tmtAbciTypes.ResponseCheckTx
 		return tmtAbciTypes.ResponseCheckTx{Code: 1, Log: "INVALID_TX"}
 	}
 
-	abci.logger.Info("Checking TX", "hash", tx.Hash().String(), "nonce", tx.Nonce(), "cost", tx.Cost())
-
-	var signer ethTypes.Signer = ethTypes.FrontierSigner{}
-	if tx.Protected() {
-		signer = ethTypes.NewEIP155Signer(tx.ChainId())
-	}
-
-	from, err := ethTypes.Sender(signer, tx)
+	from, err := extractSender(tx)
 	if err != nil {
 		abci.logger.Error("Unable to retrieve TX sender", "err", err.Error())
 		abci.metrics.CheckErrTxsTotal.Add(1, "INVALID_SENDER")
 		return tmtAbciTypes.ResponseCheckTx{Code: 1, Log: "INVALID_SENDER"}
 	}
+
+	abci.logger.Info("Checking TX", "hash", tx.Hash().String(), "from", from.String(), 
+		"nonce", tx.Nonce(), "cost", tx.Cost())
 
 	err = abci.doMempoolValidation(tx, from)
 	if err != nil {
@@ -174,9 +169,9 @@ func (abci *TendermintABCI) CheckTx(txBytes []byte) tmtAbciTypes.ResponseCheckTx
 		abci.checkTxState.AddBalance(*to, tx.Value())
 	}
 
-	abci.checkTxState.SetNonce(from, tx.Nonce() + 1)
-
-	abci.logger.Info("TX validated", "hash", tx.Hash().String(), "state_nonce", abci.checkTxState.GetNonce(from))
+	abci.checkTxState.SetNonce(from, abci.checkTxState.GetNonce(from) + 1)
+	abci.logger.Info("TX validated", "hash", tx.Hash().String(), "from", from.String(), 
+		"state_nonce", abci.checkTxState.GetNonce(from))
 
 	return tmtAbciTypes.ResponseCheckTx{Code: tmtAbciTypes.CodeTypeOK}
 }
@@ -276,8 +271,11 @@ func (abci *TendermintABCI) Commit() tmtAbciTypes.ResponseCommit {
 		abci.logger.Error("Error getting next latest state", "err", err)
 		abci.metrics.CommitErrBlockTotal.Add(1, "ErrGettingNextLastState")
 	}
+	
+	gAcc := common.HexToAddress("0xc916cfe5c83dd4fc3c3b0bf2ec2d4e401782875e")
+	gAccNonce := ethState.GetNonce(gAcc)
 	abci.checkTxState = ethState.Copy()
-
+	abci.logger.Info("Genesis Acc", "addr", gAcc.String(), "nonce", gAccNonce)
 	abci.logger.Info("Block committed", "block", block.Hash().Hex(), "root", block.Root().Hex())
 
 	return tmtAbciTypes.ResponseCommit{Data: block.Root().Bytes()}
@@ -367,4 +365,12 @@ func decodeRLP(txBytes []byte) (*ethTypes.Transaction, error) {
 		return nil, err
 	}
 	return tx, nil
+}
+
+func extractSender(tx *ethTypes.Transaction) (common.Address, error) {
+	var signer ethTypes.Signer = ethTypes.FrontierSigner{}
+	if tx.Protected() {
+		signer = ethTypes.NewEIP155Signer(tx.ChainId())
+	}
+	return ethTypes.Sender(signer, tx)
 }

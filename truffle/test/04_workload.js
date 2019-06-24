@@ -28,7 +28,7 @@ describe('Workload', () => {
   it("should return 100 tx receipts whose state is 0x1", async () => {
     const weiBalancePreTxBN = web3.utils.toBN(await web3.eth.getBalance(ROOT_ACCOUNT));
     const weiAmountSentBN = convertPhtToWeiBN("0.1");
-    const iterations = 100;
+    const iterations = 50;
     const gasLimit = 21000;
     const sentFundTxReceipt = Array();
 

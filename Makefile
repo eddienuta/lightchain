@@ -58,3 +58,8 @@ docker: ## Build docker image for lightchain
 docker-dev: ## Build docker image for lightchain
 	@echo "Build docker image"
 	docker build -t lightchain:latest-dev -f ./Dockerfile.dev --build-arg version="$(VERSION_TAG)"  .
+	
+.PHONE: build-xgo
+build-xgo:
+	@echo "Build xgo"
+	xgo --pkg cmd/lightchain --targets=darwin-10.9/*,linux/amd64,linux/386 --pkg cmd/lightchain github.com/lightstreams-network/lightchain
