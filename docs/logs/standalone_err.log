@@ -1,0 +1,591 @@
+DEBUG[06-26|11:53:16.665] Beginning new block                      engine=consensus module=ABCI        hash="[13 122 6 71 60 214 185 62 233 247 243 56 176 25 42 43 137 22 51 237 88 193 215 81 243 84 118 9 183 123 240 8]"
+DEBUG[06-26|11:53:16.666] Updating DB BlockState                   engine=database
+DEBUG[06-26|11:53:35.678] Recalculated downloader QoS values       rtt=20s confidence=1.000 ttl=1m0s
+DEBUG[06-26|11:53:35.678] Ending new block at height '30'          engine=consensus module=ABCI
+INFO [06-26|11:53:35.678] Executed block                           engine=consensus module=state       height=30 validTxs=0 invalidTxs=0
+INFO [06-26|11:53:35.683] Persisting DB Block                      engine=database  data="{header:0xc4249e6240 parent:0xc422d7d830 state:0xc4236840d0 txIndex:0 transactions:[] receipts:[] totalUsedGas:0 gp:0xc420389070}"
+DEBUG[06-26|11:53:35.684] Trie cache stats after commit            misses=0 unloads=0
+DEBUG[06-26|11:53:35.684] Trie cache stats after commit            misses=0 unloads=0
+DEBUG[06-26|11:53:35.685] Inserted new block                       number=30 hash=23ca33…303174                                                                                                          uncles=0 txs=0 gas=0 elapsed=573.392µs root=a2615a…7a4f63
+INFO [06-26|11:53:35.685] Imported new chain segment               blocks=1 txs=0 mgas=0.000 elapsed=893.187µs mgasps=0.000 number=30 hash=23ca33…303174                                                                                                          age=1m21s cache=604.00B
+DEBUG[06-26|11:53:35.685] Reinjecting stale transactions           count=0
+INFO [06-26|11:53:53.522] Block committed                          engine=consensus module=ABCI        block=0x23ca33eb6c9c31deda1dc5fdc9c20bd4c99a3f4f9954e555e006839e01303174 root=0xa2615a26b2319a61a03abed2792a24d9ce76b46f54969440426de3469a7a4f63
+INFO [06-26|11:53:53.522] Committed state                          engine=consensus module=state       height=30 txs=0 appHash=A2615A26B2319A61A03ABED2792A24D9CE76B46F54969440426DE3469A7A4F63
+INFO [06-26|11:53:53.522] Ensure peers                             engine=consensus module=pex         numOutPeers=0 numInPeers=0 numDialing=0 numToDial=10
+INFO [06-26|11:53:53.522] No addresses to dial nor connected peers. Falling back to seeds engine=consensus module=pex
+ERROR[06-26|11:53:53.522] Couldn't connect to any seeds            engine=consensus module=p2p
+INFO [06-26|11:53:53.526] Indexed block                            engine=consensus module=txindex     height=30
+DEBUG[06-26|11:53:53.526] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=C96A6FA8081F18012025
+DEBUG[06-26|11:53:53.527] Received tock                            engine=consensus module=consensus   timeout=500ms         height=30 round=0 step=RoundStepPropose
+DEBUG[06-26|11:53:53.527] Ignoring tock because we're ahead        engine=consensus module=consensus   height=31 round=0 step=RoundStepNewHeight
+DEBUG[06-26|11:53:53.527] Attempt to update stats for non-existent peer engine=consensus module=consensus   peer=
+DEBUG[06-26|11:53:53.527] Received tick                            engine=consensus module=consensus   old_ti="{Duration:500ms Height:30 Round:0 Step:RoundStepPropose}"           new_ti="{Duration:-37.583676774s Height:31 Round:0 Step:RoundStepNewHeight}"
+DEBUG[06-26|11:53:53.527] Timer already stopped                    engine=consensus module=consensus
+DEBUG[06-26|11:53:53.527] Scheduled timeout                        engine=consensus module=consensus   dur=-37.583676774s height=31 round=0 step=RoundStepNewHeight
+INFO [06-26|11:53:53.527] Timed out                                engine=consensus module=consensus   dur=-37.583676774s height=31 round=0 step=RoundStepNewHeight
+DEBUG[06-26|11:53:53.527] Received tock                            engine=consensus module=consensus   timeout=-37.583676774s height=31 round=0 step=RoundStepNewHeight
+INFO [06-26|11:53:53.527] enterNewRound(31/0). Current: 31/0/RoundStepNewHeight engine=consensus module=consensus   height=31 round=0
+DEBUG[06-26|11:53:53.527] Received tick                            engine=consensus module=consensus   old_ti="{Duration:-37.583676774s Height:31 Round:0 Step:RoundStepNewHeight}" new_ti="{Duration:600ms Height:31 Round:0 Step:RoundStepNewRound}"
+DEBUG[06-26|11:53:53.527] Timer already stopped                    engine=consensus module=consensus
+DEBUG[06-26|11:53:53.527] Scheduled timeout                        engine=consensus module=consensus   dur=600ms          height=31 round=0 step=RoundStepNewRound
+INFO [06-26|11:53:54.128] Timed out                                engine=consensus module=consensus   dur=600ms          height=31 round=0 step=RoundStepNewRound
+DEBUG[06-26|11:53:54.128] Received tock                            engine=consensus module=consensus   timeout=600ms          height=31 round=0 step=RoundStepNewRound
+INFO [06-26|11:53:54.128] enterPropose(31/0). Current: 31/0/RoundStepNewRound engine=consensus module=consensus   height=31 round=0
+DEBUG[06-26|11:53:54.129] This node is a validator                 engine=consensus module=consensus   height=31 round=0
+INFO [06-26|11:53:54.129] enterPropose: Our turn to propose        engine=consensus module=consensus   height=31 round=0 proposer=924E10D9BAB7B33D913AA8041AA65978AA53FC44 privValidator="PrivValidator{924E10D9BAB7B33D913AA8041AA65978AA53FC44 LH:30, LR:0, LS:3}"
+DEBUG[06-26|11:53:54.129] Received tick                            engine=consensus module=consensus   old_ti="{Duration:600ms Height:31 Round:0 Step:RoundStepNewRound}"           new_ti="{Duration:500ms Height:31 Round:0 Step:RoundStepPropose}"
+DEBUG[06-26|11:53:54.129] Timer already stopped                    engine=consensus module=consensus
+DEBUG[06-26|11:53:54.129] Scheduled timeout                        engine=consensus module=consensus   dur=500ms          height=31 round=0 step=RoundStepPropose
+INFO [06-26|11:53:54.141] Signed proposal                          engine=consensus module=consensus   height=31 round=0 proposal="Proposal{31/0 (357A156EE9E3EA82B1278B29C8D484EC3E41EC88397F5F5B75455C7D08D08ED1:1:0A1CD5FC1C0B, -1) 0A40BC516392 @ 2019-06-26T09:53:54.132919702Z}"
+DEBUG[06-26|11:53:54.141] Signed proposal block: Block{
+  Header{
+    Version:        {10 0}
+    ChainID:        test-chain-KPzADK
+    Height:         31
+    Time:           2019-06-26 09:53:15.428211905 +0000 UTC
+    NumTxs:         0
+    TotalTxs:       0
+    LastBlockID:    0D7A06473CD6B93EE9F7F338B0192A2B891633ED58C1D751F3547609B77BF008:1:AB4E83800B98
+    LastCommit:     3D58B74B8A413B5E2E4EF01CF559446782950FFAD1EEA51B00F83BC390B31972
+    Data:           
+    Validators:     19D0FDB4A46EEF137808A73BB581800B3EB51BEB4F766A18660A147FF652D420
+    NextValidators: 19D0FDB4A46EEF137808A73BB581800B3EB51BEB4F766A18660A147FF652D420
+    App:            A2615A26B2319A61A03ABED2792A24D9CE76B46F54969440426DE3469A7A4F63
+    Consensus:       048091BC7DDC283F77BFBF91D73C44DA58C3DF8A9CBC867405D8B7F3DAADA22F
+    Results:        
+    Evidence:       
+    Proposer:       924E10D9BAB7B33D913AA8041AA65978AA53FC44
+  }#357A156EE9E3EA82B1278B29C8D484EC3E41EC88397F5F5B75455C7D08D08ED1
+  Data{
+    
+  }#
+  EvidenceData{
+    
+  }#
+  Commit{
+    BlockID:    0D7A06473CD6B93EE9F7F338B0192A2B891633ED58C1D751F3547609B77BF008:1:AB4E83800B98
+    Precommits:
+      Vote{0:924E10D9BAB7 30/00/2(Precommit) 0D7A06473CD6 7C26EB9FB00E @ 2019-06-26T09:53:15.428211905Z}
+  }#3D58B74B8A413B5E2E4EF01CF559446782950FFAD1EEA51B00F83BC390B31972
+}#357A156EE9E3EA82B1278B29C8D484EC3E41EC88397F5F5B75455C7D08D08ED1 engine=consensus module=consensus
+DEBUG[06-26|11:53:54.142] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=C96A6FA8081F18032026
+INFO [06-26|11:53:54.150] Received proposal                        engine=consensus module=consensus   proposal="Proposal{31/0 (357A156EE9E3EA82B1278B29C8D484EC3E41EC88397F5F5B75455C7D08D08ED1:1:0A1CD5FC1C0B, -1) 0A40BC516392 @ 2019-06-26T09:53:54.132919702Z}"
+INFO [06-26|11:53:54.157] Received complete proposal block         engine=consensus module=consensus   height=31 hash=357A156EE9E3EA82B1278B29C8D484EC3E41EC88397F5F5B75455C7D08D08ED1
+INFO [06-26|11:53:54.158] enterPrevote(31/0). Current: 31/0/RoundStepPropose engine=consensus module=consensus
+INFO [06-26|11:53:54.159] enterPrevote: ProposalBlock is valid     engine=consensus module=consensus   height=31 round=0
+INFO [06-26|11:53:54.166] Signed and pushed vote                   engine=consensus module=consensus   height=31 round=0 vote="Vote{0:924E10D9BAB7 31/00/1(Prevote) 357A156EE9E3 3B3082E428E6 @ 2019-06-26T09:53:54.159373498Z}"   err=nil
+DEBUG[06-26|11:53:54.166] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=C96A6FA8081F18042026
+DEBUG[06-26|11:53:54.166] Attempt to update stats for non-existent peer engine=consensus module=consensus   peer=
+DEBUG[06-26|11:53:54.174] addVote                                  engine=consensus module=consensus   voteHeight=31 voteType=1 valIndex=0 csHeight=31
+DEBUG[06-26|11:53:54.175] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=1919B3D5081F1801
+INFO [06-26|11:53:54.176] Added to prevote                         engine=consensus module=consensus   vote="Vote{0:924E10D9BAB7 31/00/1(Prevote) 357A156EE9E3 3B3082E428E6 @ 2019-06-26T09:53:54.159373498Z}"   prevotes="VoteSet{H:31 R:0 T:1 +2/3:357A156EE9E3EA82B1278B29C8D484EC3E41EC88397F5F5B75455C7D08D08ED1:1:0A1CD5FC1C0B(1) BA{1:x} map[]}"
+INFO [06-26|11:53:54.176] Updating ValidBlock because of POL.      engine=consensus module=consensus   validRound=-1 POLRound=0
+DEBUG[06-26|11:53:54.176] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=87E347CB081F1A24080112200A1CD5FC1C0BA1DC2720B77BBD65DD93D5C048C8CC0FB40B30F96921CA29A03E22050801120101
+INFO [06-26|11:53:54.176] enterPrecommit(31/0). Current: 31/0/RoundStepPrevote engine=consensus module=consensus   height=31 round=0
+INFO [06-26|11:53:54.176] enterPrecommit: +2/3 prevoted proposal block. Locking engine=consensus module=consensus   height=31 round=0 hash=357A156EE9E3EA82B1278B29C8D484EC3E41EC88397F5F5B75455C7D08D08ED1
+INFO [06-26|11:53:54.185] Signed and pushed vote                   engine=consensus module=consensus   height=31 round=0 vote="Vote{0:924E10D9BAB7 31/00/2(Precommit) 357A156EE9E3 B4E92E3D1654 @ 2019-06-26T09:53:54.177942802Z}" err=nil
+DEBUG[06-26|11:53:54.185] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=C96A6FA8081F18062026
+DEBUG[06-26|11:53:54.185] Attempt to update stats for non-existent peer engine=consensus module=consensus   peer=
+DEBUG[06-26|11:53:54.191] addVote                                  engine=consensus module=consensus   voteHeight=31 voteType=2 valIndex=0 csHeight=31
+DEBUG[06-26|11:53:54.192] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=1919B3D5081F1802
+INFO [06-26|11:53:54.192] Added to precommit                       engine=consensus module=consensus   vote="Vote{0:924E10D9BAB7 31/00/2(Precommit) 357A156EE9E3 B4E92E3D1654 @ 2019-06-26T09:53:54.177942802Z}" precommits="VoteSet{H:31 R:0 T:2 +2/3:357A156EE9E3EA82B1278B29C8D484EC3E41EC88397F5F5B75455C7D08D08ED1:1:0A1CD5FC1C0B(1) BA{1:x} map[]}"
+DEBUG[06-26|11:53:54.192] enterNewRound(31/0): Invalid args. Current step: 31/0/RoundStepPrecommit engine=consensus module=consensus   height=31 round=0
+DEBUG[06-26|11:53:54.192] enterPrecommit(31/0): Invalid args. Current step: 31/0/RoundStepPrecommit engine=consensus module=consensus   height=31 round=0
+INFO [06-26|11:53:54.192] enterCommit(31/0). Current: 31/0/RoundStepPrecommit engine=consensus module=consensus   height=31 commitRound=0
+INFO [06-26|11:53:54.193] Commit is for locked block. Set ProposalBlock=LockedBlock engine=consensus module=consensus   height=31 commitRound=0 blockHash=357A156EE9E3EA82B1278B29C8D484EC3E41EC88397F5F5B75455C7D08D08ED1
+DEBUG[06-26|11:53:54.193] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=C96A6FA8081F18082026
+INFO [06-26|11:53:54.195] Finalizing commit of block with 0 txs    engine=consensus module=consensus   height=31 hash=357A156EE9E3EA82B1278B29C8D484EC3E41EC88397F5F5B75455C7D08D08ED1                                                       root=A2615A26B2319A61A03ABED2792A24D9CE76B46F54969440426DE3469A7A4F63
+INFO [06-26|11:53:54.195] Block{
+  Header{
+    Version:        {10 0}
+    ChainID:        test-chain-KPzADK
+    Height:         31
+    Time:           2019-06-26 09:53:15.428211905 +0000 UTC
+    NumTxs:         0
+    TotalTxs:       0
+    LastBlockID:    0D7A06473CD6B93EE9F7F338B0192A2B891633ED58C1D751F3547609B77BF008:1:AB4E83800B98
+    LastCommit:     3D58B74B8A413B5E2E4EF01CF559446782950FFAD1EEA51B00F83BC390B31972
+    Data:           
+    Validators:     19D0FDB4A46EEF137808A73BB581800B3EB51BEB4F766A18660A147FF652D420
+    NextValidators: 19D0FDB4A46EEF137808A73BB581800B3EB51BEB4F766A18660A147FF652D420
+    App:            A2615A26B2319A61A03ABED2792A24D9CE76B46F54969440426DE3469A7A4F63
+    Consensus:       048091BC7DDC283F77BFBF91D73C44DA58C3DF8A9CBC867405D8B7F3DAADA22F
+    Results:        
+    Evidence:       
+    Proposer:       924E10D9BAB7B33D913AA8041AA65978AA53FC44
+  }#357A156EE9E3EA82B1278B29C8D484EC3E41EC88397F5F5B75455C7D08D08ED1
+  Data{
+    
+  }#
+  EvidenceData{
+    
+  }#
+  Commit{
+    BlockID:    0D7A06473CD6B93EE9F7F338B0192A2B891633ED58C1D751F3547609B77BF008:1:AB4E83800B98
+    Precommits:
+      Vote{0:924E10D9BAB7 30/00/2(Precommit) 0D7A06473CD6 7C26EB9FB00E @ 2019-06-26T09:53:15.428211905Z}
+  }#3D58B74B8A413B5E2E4EF01CF559446782950FFAD1EEA51B00F83BC390B31972
+}#357A156EE9E3EA82B1278B29C8D484EC3E41EC88397F5F5B75455C7D08D08ED1 engine=consensus module=consensus
+DEBUG[06-26|11:53:58.451] Recalculated downloader QoS values       rtt=20s confidence=1.000 ttl=1m0s
+DEBUG[06-26|11:53:58.452] Beginning new block                      engine=consensus module=ABCI        hash="[53 122 21 110 233 227 234 130 177 39 139 41 200 212 132 236 62 65 236 136 57 127 95 91 117 69 92 125 8 208 142 209]"
+DEBUG[06-26|11:53:58.455] Updating DB BlockState                   engine=database
+DEBUG[06-26|11:54:01.187] Ending new block at height '31'          engine=consensus module=ABCI
+INFO [06-26|11:54:01.187] Executed block                           engine=consensus module=state       height=31 validTxs=0 invalidTxs=0
+INFO [06-26|11:53:58.456] Timed out                                engine=consensus module=consensus   dur=500ms          height=31 round=0 step=RoundStepPropose
+INFO [06-26|11:54:01.191] Persisting DB Block                      engine=database  data="{header:0xc422dcbb00 parent:0xc423707a70 state:0xc424a70340 txIndex:0 transactions:[] receipts:[] totalUsedGas:0 gp:0xc424a76370}"
+DEBUG[06-26|11:54:01.191] Trie cache stats after commit            misses=0 unloads=0
+DEBUG[06-26|11:54:01.192] Trie cache stats after commit            misses=0 unloads=0
+DEBUG[06-26|11:54:01.192] Inserted new block                       number=31 hash=f26e24…48172e                                                                                                          uncles=0 txs=0 gas=0 elapsed=1.021ms   root=a2615a…7a4f63
+INFO [06-26|11:54:01.193] Imported new chain segment               blocks=1 txs=0 mgas=0.000 elapsed=1.472ms   mgasps=0.000 number=31 hash=f26e24…48172e                                                                                                          cache=604.00B
+DEBUG[06-26|11:54:01.193] Reinjecting stale transactions           count=0
+INFO [06-26|11:54:11.014] Block committed                          engine=consensus module=ABCI        block=0xf26e2448ac72e82ec55623a0cc3ab6413992a5ac63f8db06aca41ed0f448172e root=0xa2615a26b2319a61a03abed2792a24d9ce76b46f54969440426de3469a7a4f63
+INFO [06-26|11:54:11.014] Committed state                          engine=consensus module=state       height=31 txs=0 appHash=A2615A26B2319A61A03ABED2792A24D9CE76B46F54969440426DE3469A7A4F63
+INFO [06-26|11:54:11.021] Indexed block                            engine=consensus module=txindex     height=31
+DEBUG[06-26|11:54:11.021] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=C96A6FA8082018012010
+DEBUG[06-26|11:54:11.021] Received tock                            engine=consensus module=consensus   timeout=500ms          height=31 round=0 step=RoundStepPropose
+DEBUG[06-26|11:54:11.021] Attempt to update stats for non-existent peer engine=consensus module=consensus   peer=
+DEBUG[06-26|11:54:11.021] Ignoring tock because we're ahead        engine=consensus module=consensus   height=32 round=0 step=RoundStepNewHeight
+DEBUG[06-26|11:54:11.021] Received tick                            engine=consensus module=consensus   old_ti="{Duration:500ms Height:31 Round:0 Step:RoundStepPropose}"            new_ti="{Duration:-16.328325084s Height:32 Round:0 Step:RoundStepNewHeight}"
+DEBUG[06-26|11:54:11.021] Timer already stopped                    engine=consensus module=consensus
+DEBUG[06-26|11:54:11.021] Scheduled timeout                        engine=consensus module=consensus   dur=-16.328325084s height=32 round=0 step=RoundStepNewHeight
+INFO [06-26|11:54:11.022] Timed out                                engine=consensus module=consensus   dur=-16.328325084s height=32 round=0 step=RoundStepNewHeight
+DEBUG[06-26|11:54:11.022] Received tock                            engine=consensus module=consensus   timeout=-16.328325084s height=32 round=0 step=RoundStepNewHeight
+INFO [06-26|11:54:11.022] enterNewRound(32/0). Current: 32/0/RoundStepNewHeight engine=consensus module=consensus   height=32 round=0
+DEBUG[06-26|11:54:11.022] Received tick                            engine=consensus module=consensus   old_ti="{Duration:-16.328325084s Height:32 Round:0 Step:RoundStepNewHeight}" new_ti="{Duration:600ms Height:32 Round:0 Step:RoundStepNewRound}"
+DEBUG[06-26|11:54:11.022] Timer already stopped                    engine=consensus module=consensus
+DEBUG[06-26|11:54:11.022] Scheduled timeout                        engine=consensus module=consensus   dur=600ms          height=32 round=0 step=RoundStepNewRound
+INFO [06-26|11:54:11.622] Timed out                                engine=consensus module=consensus   dur=600ms          height=32 round=0 step=RoundStepNewRound
+DEBUG[06-26|11:54:11.622] Received tock                            engine=consensus module=consensus   timeout=600ms          height=32 round=0 step=RoundStepNewRound
+INFO [06-26|11:54:11.623] enterPropose(32/0). Current: 32/0/RoundStepNewRound engine=consensus module=consensus   height=32 round=0
+DEBUG[06-26|11:54:11.623] This node is a validator                 engine=consensus module=consensus   height=32 round=0
+INFO [06-26|11:54:11.623] enterPropose: Our turn to propose        engine=consensus module=consensus   height=32 round=0 proposer=924E10D9BAB7B33D913AA8041AA65978AA53FC44 privValidator="PrivValidator{924E10D9BAB7B33D913AA8041AA65978AA53FC44 LH:31, LR:0, LS:3}"
+DEBUG[06-26|11:54:11.623] Received tick                            engine=consensus module=consensus   old_ti="{Duration:600ms Height:32 Round:0 Step:RoundStepNewRound}"           new_ti="{Duration:500ms Height:32 Round:0 Step:RoundStepPropose}"
+DEBUG[06-26|11:54:11.623] Timer already stopped                    engine=consensus module=consensus
+DEBUG[06-26|11:54:11.623] Scheduled timeout                        engine=consensus module=consensus   dur=500ms          height=32 round=0 step=RoundStepPropose
+INFO [06-26|11:54:11.636] Signed proposal                          engine=consensus module=consensus   height=32 round=0 proposal="Proposal{32/0 (7FF830B170620A08907336FC6BF03A58E1E9BFAEAE84940E6277BCBBA538DBB3:1:BB4BBFF25B42, -1) CF4C3455C2B9 @ 2019-06-26T09:54:11.62550983Z}"
+DEBUG[06-26|11:54:11.637] Signed proposal block: Block{
+  Header{
+    Version:        {10 0}
+    ChainID:        test-chain-KPzADK
+    Height:         32
+    Time:           2019-06-26 09:53:54.177942802 +0000 UTC
+    NumTxs:         0
+    TotalTxs:       0
+    LastBlockID:    357A156EE9E3EA82B1278B29C8D484EC3E41EC88397F5F5B75455C7D08D08ED1:1:0A1CD5FC1C0B
+    LastCommit:     1C1D18206F88A984B9058B6DF7BC701C4C529FBED74BE3D9EE2B6F5275D54937
+    Data:           
+    Validators:     19D0FDB4A46EEF137808A73BB581800B3EB51BEB4F766A18660A147FF652D420
+    NextValidators: 19D0FDB4A46EEF137808A73BB581800B3EB51BEB4F766A18660A147FF652D420
+    App:            A2615A26B2319A61A03ABED2792A24D9CE76B46F54969440426DE3469A7A4F63
+    Consensus:       048091BC7DDC283F77BFBF91D73C44DA58C3DF8A9CBC867405D8B7F3DAADA22F
+    Results:        
+    Evidence:       
+    Proposer:       924E10D9BAB7B33D913AA8041AA65978AA53FC44
+  }#7FF830B170620A08907336FC6BF03A58E1E9BFAEAE84940E6277BCBBA538DBB3
+  Data{
+    
+  }#
+  EvidenceData{
+    
+  }#
+  Commit{
+    BlockID:    357A156EE9E3EA82B1278B29C8D484EC3E41EC88397F5F5B75455C7D08D08ED1:1:0A1CD5FC1C0B
+    Precommits:
+      Vote{0:924E10D9BAB7 31/00/2(Precommit) 357A156EE9E3 B4E92E3D1654 @ 2019-06-26T09:53:54.177942802Z}
+  }#1C1D18206F88A984B9058B6DF7BC701C4C529FBED74BE3D9EE2B6F5275D54937
+}#7FF830B170620A08907336FC6BF03A58E1E9BFAEAE84940E6277BCBBA538DBB3 engine=consensus module=consensus
+DEBUG[06-26|11:54:11.637] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=C96A6FA8082018032010
+INFO [06-26|11:54:11.643] Received proposal                        engine=consensus module=consensus   proposal="Proposal{32/0 (7FF830B170620A08907336FC6BF03A58E1E9BFAEAE84940E6277BCBBA538DBB3:1:BB4BBFF25B42, -1) CF4C3455C2B9 @ 2019-06-26T09:54:11.62550983Z}"
+INFO [06-26|11:54:11.650] Received complete proposal block         engine=consensus module=consensus   height=32 hash=7FF830B170620A08907336FC6BF03A58E1E9BFAEAE84940E6277BCBBA538DBB3
+INFO [06-26|11:54:11.650] enterPrevote(32/0). Current: 32/0/RoundStepPropose engine=consensus module=consensus
+INFO [06-26|11:54:11.652] enterPrevote: ProposalBlock is valid     engine=consensus module=consensus   height=32 round=0
+INFO [06-26|11:54:11.661] Signed and pushed vote                   engine=consensus module=consensus   height=32 round=0 vote="Vote{0:924E10D9BAB7 32/00/1(Prevote) 7FF830B17062 D086411EEB3D @ 2019-06-26T09:54:11.652457544Z}"   err=nil
+DEBUG[06-26|11:54:11.661] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=C96A6FA8082018042010
+DEBUG[06-26|11:54:11.661] Attempt to update stats for non-existent peer engine=consensus module=consensus   peer=
+DEBUG[06-26|11:54:11.667] addVote                                  engine=consensus module=consensus   voteHeight=32 voteType=1 valIndex=0 csHeight=32
+DEBUG[06-26|11:54:11.667] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=1919B3D508201801
+INFO [06-26|11:54:11.667] Added to prevote                         engine=consensus module=consensus   vote="Vote{0:924E10D9BAB7 32/00/1(Prevote) 7FF830B17062 D086411EEB3D @ 2019-06-26T09:54:11.652457544Z}"   prevotes="VoteSet{H:32 R:0 T:1 +2/3:7FF830B170620A08907336FC6BF03A58E1E9BFAEAE84940E6277BCBBA538DBB3:1:BB4BBFF25B42(1) BA{1:x} map[]}"
+INFO [06-26|11:54:11.668] Updating ValidBlock because of POL.      engine=consensus module=consensus   validRound=-1 POLRound=0
+DEBUG[06-26|11:54:11.668] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=87E347CB08201A2408011220BB4BBFF25B42B5C67669C15AF801E410FE39FDD143A4F4C12BF411A29D39B98822050801120101
+INFO [06-26|11:54:11.668] enterPrecommit(32/0). Current: 32/0/RoundStepPrevote engine=consensus module=consensus   height=32 round=0
+INFO [06-26|11:54:11.668] enterPrecommit: +2/3 prevoted proposal block. Locking engine=consensus module=consensus   height=32 round=0 hash=7FF830B170620A08907336FC6BF03A58E1E9BFAEAE84940E6277BCBBA538DBB3
+INFO [06-26|11:54:11.678] Signed and pushed vote                   engine=consensus module=consensus   height=32 round=0 vote="Vote{0:924E10D9BAB7 32/00/2(Precommit) 7FF830B17062 2BC9294D7220 @ 2019-06-26T09:54:11.668866432Z}" err=nil
+DEBUG[06-26|11:54:11.678] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=C96A6FA8082018062010
+DEBUG[06-26|11:54:11.678] Attempt to update stats for non-existent peer engine=consensus module=consensus   peer=
+DEBUG[06-26|11:54:11.684] addVote                                  engine=consensus module=consensus   voteHeight=32 voteType=2 valIndex=0 csHeight=32
+DEBUG[06-26|11:54:11.684] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=1919B3D508201802
+INFO [06-26|11:54:11.684] Added to precommit                       engine=consensus module=consensus   vote="Vote{0:924E10D9BAB7 32/00/2(Precommit) 7FF830B17062 2BC9294D7220 @ 2019-06-26T09:54:11.668866432Z}" precommits="VoteSet{H:32 R:0 T:2 +2/3:7FF830B170620A08907336FC6BF03A58E1E9BFAEAE84940E6277BCBBA538DBB3:1:BB4BBFF25B42(1) BA{1:x} map[]}"
+DEBUG[06-26|11:54:11.684] enterNewRound(32/0): Invalid args. Current step: 32/0/RoundStepPrecommit engine=consensus module=consensus   height=32 round=0
+DEBUG[06-26|11:54:11.684] enterPrecommit(32/0): Invalid args. Current step: 32/0/RoundStepPrecommit engine=consensus module=consensus   height=32 round=0
+INFO [06-26|11:54:11.684] enterCommit(32/0). Current: 32/0/RoundStepPrecommit engine=consensus module=consensus   height=32 commitRound=0
+INFO [06-26|11:54:11.684] Commit is for locked block. Set ProposalBlock=LockedBlock engine=consensus module=consensus   height=32 commitRound=0 blockHash=7FF830B170620A08907336FC6BF03A58E1E9BFAEAE84940E6277BCBBA538DBB3
+DEBUG[06-26|11:54:11.685] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=C96A6FA8082018082010
+INFO [06-26|11:54:11.685] Finalizing commit of block with 0 txs    engine=consensus module=consensus   height=32 hash=7FF830B170620A08907336FC6BF03A58E1E9BFAEAE84940E6277BCBBA538DBB3                                                       root=A2615A26B2319A61A03ABED2792A24D9CE76B46F54969440426DE3469A7A4F63
+INFO [06-26|11:54:11.685] Block{
+  Header{
+    Version:        {10 0}
+    ChainID:        test-chain-KPzADK
+    Height:         32
+    Time:           2019-06-26 09:53:54.177942802 +0000 UTC
+    NumTxs:         0
+    TotalTxs:       0
+    LastBlockID:    357A156EE9E3EA82B1278B29C8D484EC3E41EC88397F5F5B75455C7D08D08ED1:1:0A1CD5FC1C0B
+    LastCommit:     1C1D18206F88A984B9058B6DF7BC701C4C529FBED74BE3D9EE2B6F5275D54937
+    Data:           
+    Validators:     19D0FDB4A46EEF137808A73BB581800B3EB51BEB4F766A18660A147FF652D420
+    NextValidators: 19D0FDB4A46EEF137808A73BB581800B3EB51BEB4F766A18660A147FF652D420
+    App:            A2615A26B2319A61A03ABED2792A24D9CE76B46F54969440426DE3469A7A4F63
+    Consensus:       048091BC7DDC283F77BFBF91D73C44DA58C3DF8A9CBC867405D8B7F3DAADA22F
+    Results:        
+    Evidence:       
+    Proposer:       924E10D9BAB7B33D913AA8041AA65978AA53FC44
+  }#7FF830B170620A08907336FC6BF03A58E1E9BFAEAE84940E6277BCBBA538DBB3
+  Data{
+    
+  }#
+  EvidenceData{
+    
+  }#
+  Commit{
+    BlockID:    357A156EE9E3EA82B1278B29C8D484EC3E41EC88397F5F5B75455C7D08D08ED1:1:0A1CD5FC1C0B
+    Precommits:
+      Vote{0:924E10D9BAB7 31/00/2(Precommit) 357A156EE9E3 B4E92E3D1654 @ 2019-06-26T09:53:54.177942802Z}
+  }#1C1D18206F88A984B9058B6DF7BC701C4C529FBED74BE3D9EE2B6F5275D54937
+}#7FF830B170620A08907336FC6BF03A58E1E9BFAEAE84940E6277BCBBA538DBB3 engine=consensus module=consensus
+INFO [06-26|11:54:14.401] Timed out                                engine=consensus module=consensus   dur=500ms          height=32 round=0 step=RoundStepPropose
+INFO [06-26|11:54:14.401] Ensure peers                             engine=consensus module=pex         numOutPeers=0 numInPeers=0 numDialing=0 numToDial=10
+INFO [06-26|11:54:14.401] No addresses to dial nor connected peers. Falling back to seeds engine=consensus module=pex
+ERROR[06-26|11:54:14.401] Couldn't connect to any seeds            engine=consensus module=p2p
+DEBUG[06-26|11:54:14.402] Beginning new block                      engine=consensus module=ABCI        hash="[127 248 48 177 112 98 10 8 144 115 54 252 107 240 58 88 225 233 191 174 174 132 148 14 98 119 188 187 165 56 219 179]"
+DEBUG[06-26|11:54:14.402] Updating DB BlockState                   engine=database
+INFO [06-26|11:54:14.402] Saving AddrBook to file                  engine=consensus module=p2p         book=/home/ggarrido/.lightchain/standalone/consensus/config/addrbook.json size=0
+DEBUG[06-26|11:55:15.693] Ending new block at height '32'          engine=consensus module=ABCI
+INFO [06-26|11:55:15.693] Executed block                           engine=consensus module=state       height=32 validTxs=0 invalidTxs=0
+INFO [06-26|11:55:15.693] Ensure peers                             engine=consensus module=pex         numOutPeers=0 numInPeers=0 numDialing=0 numToDial=10
+INFO [06-26|11:55:15.693] No addresses to dial nor connected peers. Falling back to seeds engine=consensus module=pex
+ERROR[06-26|11:55:15.694] Couldn't connect to any seeds            engine=consensus module=p2p
+DEBUG[06-26|11:55:15.694] Recalculated downloader QoS values       rtt=20s confidence=1.000 ttl=1m0s
+INFO [06-26|11:55:15.696] Persisting DB Block                      engine=database  data="{header:0xc424af0000 parent:0xc423675b00 state:0xc4236bdee0 txIndex:0 transactions:[] receipts:[] totalUsedGas:0 gp:0xc424a6a658}"
+DEBUG[06-26|11:55:15.696] Trie cache stats after commit            misses=0 unloads=0
+DEBUG[06-26|11:55:15.697] Trie cache stats after commit            misses=0 unloads=0
+DEBUG[06-26|11:55:15.698] Inserted new block                       number=32 hash=5b59f4…85c8bd                                                                                                            uncles=0 txs=0 gas=0 elapsed=996.904µs root=a2615a…7a4f63
+INFO [06-26|11:55:15.698] Imported new chain segment               blocks=1 txs=0 mgas=0.000 elapsed=1.563ms   mgasps=0.000 number=32 hash=5b59f4…85c8bd                                                                                                            age=1m21s cache=604.00B
+DEBUG[06-26|11:55:15.698] Reinjecting stale transactions           count=0
+INFO [06-26|11:55:31.956] Block committed                          engine=consensus module=ABCI        block=0x5b59f40bfd24f5116dd76820306ef206a2a43973f46ff537c5ef0eb8ce85c8bd root=0xa2615a26b2319a61a03abed2792a24d9ce76b46f54969440426de3469a7a4f63
+INFO [06-26|11:55:31.956] Committed state                          engine=consensus module=state       height=32 txs=0 appHash=A2615A26B2319A61A03ABED2792A24D9CE76B46F54969440426DE3469A7A4F63
+INFO [06-26|11:55:31.983] Indexed block                            engine=consensus module=txindex     height=32
+DEBUG[06-26|11:55:31.984] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=C96A6FA808211801204F
+DEBUG[06-26|11:55:31.984] Received tick                            engine=consensus module=consensus   old_ti="{Duration:500ms Height:32 Round:0 Step:RoundStepPropose}"            new_ti="{Duration:-1m19.799183263s Height:33 Round:0 Step:RoundStepNewHeight}"
+DEBUG[06-26|11:55:31.984] Timer already stopped                    engine=consensus module=consensus
+DEBUG[06-26|11:55:31.984] Received tock                            engine=consensus module=consensus   timeout=500ms          height=32 round=0 step=RoundStepPropose
+DEBUG[06-26|11:55:31.984] Ignoring tock because we're ahead        engine=consensus module=consensus   height=33 round=0 step=RoundStepNewHeight
+DEBUG[06-26|11:55:31.984] Attempt to update stats for non-existent peer engine=consensus module=consensus   peer=
+DEBUG[06-26|11:55:31.984] Scheduled timeout                        engine=consensus module=consensus   dur=-1m19.799183263s height=33 round=0 step=RoundStepNewHeight
+INFO [06-26|11:55:31.984] Timed out                                engine=consensus module=consensus   dur=-1m19.799183263s height=33 round=0 step=RoundStepNewHeight
+DEBUG[06-26|11:55:31.984] Received tock                            engine=consensus module=consensus   timeout=-1m19.799183263s height=33 round=0 step=RoundStepNewHeight
+INFO [06-26|11:55:31.984] enterNewRound(33/0). Current: 33/0/RoundStepNewHeight engine=consensus module=consensus   height=33 round=0
+DEBUG[06-26|11:55:31.984] Received tick                            engine=consensus module=consensus   old_ti="{Duration:-1m19.799183263s Height:33 Round:0 Step:RoundStepNewHeight}" new_ti="{Duration:600ms Height:33 Round:0 Step:RoundStepNewRound}"
+DEBUG[06-26|11:55:31.984] Timer already stopped                    engine=consensus module=consensus
+DEBUG[06-26|11:55:31.984] Scheduled timeout                        engine=consensus module=consensus   dur=600ms            height=33 round=0 step=RoundStepNewRound
+INFO [06-26|11:55:32.585] Timed out                                engine=consensus module=consensus   dur=600ms            height=33 round=0 step=RoundStepNewRound
+DEBUG[06-26|11:55:32.585] Received tock                            engine=consensus module=consensus   timeout=600ms            height=33 round=0 step=RoundStepNewRound
+INFO [06-26|11:55:32.585] enterPropose(33/0). Current: 33/0/RoundStepNewRound engine=consensus module=consensus   height=33 round=0
+DEBUG[06-26|11:55:32.585] This node is a validator                 engine=consensus module=consensus   height=33 round=0
+INFO [06-26|11:55:32.585] enterPropose: Our turn to propose        engine=consensus module=consensus   height=33 round=0 proposer=924E10D9BAB7B33D913AA8041AA65978AA53FC44 privValidator="PrivValidator{924E10D9BAB7B33D913AA8041AA65978AA53FC44 LH:32, LR:0, LS:3}"
+DEBUG[06-26|11:55:32.585] Received tick                            engine=consensus module=consensus   old_ti="{Duration:600ms Height:33 Round:0 Step:RoundStepNewRound}"             new_ti="{Duration:500ms Height:33 Round:0 Step:RoundStepPropose}"
+DEBUG[06-26|11:55:32.586] Timer already stopped                    engine=consensus module=consensus
+DEBUG[06-26|11:55:32.586] Scheduled timeout                        engine=consensus module=consensus   dur=500ms            height=33 round=0 step=RoundStepPropose
+INFO [06-26|11:55:32.595] Signed proposal                          engine=consensus module=consensus   height=33 round=0 proposal="Proposal{33/0 (30E3808051F93A21E03B2902B7C6FDB871C968ED4E61A11CBBEC7B063AC2A54F:1:84023FF05252, -1) E6FB4242A947 @ 2019-06-26T09:55:32.587455667Z}"
+DEBUG[06-26|11:55:32.596] Signed proposal block: Block{
+  Header{
+    Version:        {10 0}
+    ChainID:        test-chain-KPzADK
+    Height:         33
+    Time:           2019-06-26 09:54:11.668866432 +0000 UTC
+    NumTxs:         0
+    TotalTxs:       0
+    LastBlockID:    7FF830B170620A08907336FC6BF03A58E1E9BFAEAE84940E6277BCBBA538DBB3:1:BB4BBFF25B42
+    LastCommit:     7C5DD2CAB6785975BD3DB4C5FA79E836933129CC3193EE6150463D7F3F4BECAB
+    Data:           
+    Validators:     19D0FDB4A46EEF137808A73BB581800B3EB51BEB4F766A18660A147FF652D420
+    NextValidators: 19D0FDB4A46EEF137808A73BB581800B3EB51BEB4F766A18660A147FF652D420
+    App:            A2615A26B2319A61A03ABED2792A24D9CE76B46F54969440426DE3469A7A4F63
+    Consensus:       048091BC7DDC283F77BFBF91D73C44DA58C3DF8A9CBC867405D8B7F3DAADA22F
+    Results:        
+    Evidence:       
+    Proposer:       924E10D9BAB7B33D913AA8041AA65978AA53FC44
+  }#30E3808051F93A21E03B2902B7C6FDB871C968ED4E61A11CBBEC7B063AC2A54F
+  Data{
+    
+  }#
+  EvidenceData{
+    
+  }#
+  Commit{
+    BlockID:    7FF830B170620A08907336FC6BF03A58E1E9BFAEAE84940E6277BCBBA538DBB3:1:BB4BBFF25B42
+    Precommits:
+      Vote{0:924E10D9BAB7 32/00/2(Precommit) 7FF830B17062 2BC9294D7220 @ 2019-06-26T09:54:11.668866432Z}
+  }#7C5DD2CAB6785975BD3DB4C5FA79E836933129CC3193EE6150463D7F3F4BECAB
+}#30E3808051F93A21E03B2902B7C6FDB871C968ED4E61A11CBBEC7B063AC2A54F engine=consensus module=consensus
+DEBUG[06-26|11:55:32.596] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=C96A6FA8082118032050
+INFO [06-26|11:55:32.604] Received proposal                        engine=consensus module=consensus   proposal="Proposal{33/0 (30E3808051F93A21E03B2902B7C6FDB871C968ED4E61A11CBBEC7B063AC2A54F:1:84023FF05252, -1) E6FB4242A947 @ 2019-06-26T09:55:32.587455667Z}"
+INFO [06-26|11:55:32.617] Received complete proposal block         engine=consensus module=consensus   height=33 hash=30E3808051F93A21E03B2902B7C6FDB871C968ED4E61A11CBBEC7B063AC2A54F
+INFO [06-26|11:55:32.617] enterPrevote(33/0). Current: 33/0/RoundStepPropose engine=consensus module=consensus
+INFO [06-26|11:55:32.618] enterPrevote: ProposalBlock is valid     engine=consensus module=consensus   height=33 round=0
+INFO [06-26|11:55:32.620] Signed and pushed vote                   engine=consensus module=consensus   height=33 round=0 vote="Vote{0:924E10D9BAB7 33/00/1(Prevote) 30E3808051F9 4AC1999C6527 @ 2019-06-26T09:55:32.618956934Z}"   err=nil
+DEBUG[06-26|11:55:32.621] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=C96A6FA8082118042050
+DEBUG[06-26|11:55:32.621] Attempt to update stats for non-existent peer engine=consensus module=consensus   peer=
+DEBUG[06-26|11:55:32.629] addVote                                  engine=consensus module=consensus   voteHeight=33 voteType=1 valIndex=0 csHeight=33
+DEBUG[06-26|11:55:32.631] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=1919B3D508211801
+INFO [06-26|11:55:32.631] Added to prevote                         engine=consensus module=consensus   vote="Vote{0:924E10D9BAB7 33/00/1(Prevote) 30E3808051F9 4AC1999C6527 @ 2019-06-26T09:55:32.618956934Z}"   prevotes="VoteSet{H:33 R:0 T:1 +2/3:30E3808051F93A21E03B2902B7C6FDB871C968ED4E61A11CBBEC7B063AC2A54F:1:84023FF05252(1) BA{1:x} map[]}"
+INFO [06-26|11:55:32.631] Updating ValidBlock because of POL.      engine=consensus module=consensus   validRound=-1 POLRound=0
+DEBUG[06-26|11:55:32.631] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=87E347CB08211A240801122084023FF052525BD59426428E98AB2B6899B85167A4DFE1AF561771CE7CA07AFF22050801120101
+INFO [06-26|11:55:32.631] enterPrecommit(33/0). Current: 33/0/RoundStepPrevote engine=consensus module=consensus   height=33 round=0
+INFO [06-26|11:55:32.631] enterPrecommit: +2/3 prevoted proposal block. Locking engine=consensus module=consensus   height=33 round=0 hash=30E3808051F93A21E03B2902B7C6FDB871C968ED4E61A11CBBEC7B063AC2A54F
+INFO [06-26|11:55:32.637] Signed and pushed vote                   engine=consensus module=consensus   height=33 round=0 vote="Vote{0:924E10D9BAB7 33/00/2(Precommit) 30E3808051F9 31B392FADBA5 @ 2019-06-26T09:55:32.633238057Z}" err=nil
+DEBUG[06-26|11:55:32.637] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=C96A6FA8082118062050
+DEBUG[06-26|11:55:32.638] Attempt to update stats for non-existent peer engine=consensus module=consensus   peer=
+DEBUG[06-26|11:55:32.645] addVote                                  engine=consensus module=consensus   voteHeight=33 voteType=2 valIndex=0 csHeight=33
+DEBUG[06-26|11:55:32.646] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=1919B3D508211802
+INFO [06-26|11:55:32.647] Added to precommit                       engine=consensus module=consensus   vote="Vote{0:924E10D9BAB7 33/00/2(Precommit) 30E3808051F9 31B392FADBA5 @ 2019-06-26T09:55:32.633238057Z}" precommits="VoteSet{H:33 R:0 T:2 +2/3:30E3808051F93A21E03B2902B7C6FDB871C968ED4E61A11CBBEC7B063AC2A54F:1:84023FF05252(1) BA{1:x} map[]}"
+DEBUG[06-26|11:55:32.647] enterNewRound(33/0): Invalid args. Current step: 33/0/RoundStepPrecommit engine=consensus module=consensus   height=33 round=0
+DEBUG[06-26|11:55:32.647] enterPrecommit(33/0): Invalid args. Current step: 33/0/RoundStepPrecommit engine=consensus module=consensus   height=33 round=0
+INFO [06-26|11:55:32.647] enterCommit(33/0). Current: 33/0/RoundStepPrecommit engine=consensus module=consensus   height=33 commitRound=0
+INFO [06-26|11:55:32.647] Commit is for locked block. Set ProposalBlock=LockedBlock engine=consensus module=consensus   height=33 commitRound=0 blockHash=30E3808051F93A21E03B2902B7C6FDB871C968ED4E61A11CBBEC7B063AC2A54F
+DEBUG[06-26|11:55:32.648] Broadcast                                engine=consensus module=p2p         channel=32 msgBytes=C96A6FA8082118082050
+INFO [06-26|11:55:32.649] Finalizing commit of block with 0 txs    engine=consensus module=consensus   height=33 hash=30E3808051F93A21E03B2902B7C6FDB871C968ED4E61A11CBBEC7B063AC2A54F                                                         root=A2615A26B2319A61A03ABED2792A24D9CE76B46F54969440426DE3469A7A4F63
+INFO [06-26|11:55:32.650] Block{
+  Header{
+    Version:        {10 0}
+    ChainID:        test-chain-KPzADK
+    Height:         33
+    Time:           2019-06-26 09:54:11.668866432 +0000 UTC
+    NumTxs:         0
+    TotalTxs:       0
+    LastBlockID:    7FF830B170620A08907336FC6BF03A58E1E9BFAEAE84940E6277BCBBA538DBB3:1:BB4BBFF25B42
+    LastCommit:     7C5DD2CAB6785975BD3DB4C5FA79E836933129CC3193EE6150463D7F3F4BECAB
+    Data:           
+    Validators:     19D0FDB4A46EEF137808A73BB581800B3EB51BEB4F766A18660A147FF652D420
+    NextValidators: 19D0FDB4A46EEF137808A73BB581800B3EB51BEB4F766A18660A147FF652D420
+    App:            A2615A26B2319A61A03ABED2792A24D9CE76B46F54969440426DE3469A7A4F63
+    Consensus:       048091BC7DDC283F77BFBF91D73C44DA58C3DF8A9CBC867405D8B7F3DAADA22F
+    Results:        
+    Evidence:       
+    Proposer:       924E10D9BAB7B33D913AA8041AA65978AA53FC44
+  }#30E3808051F93A21E03B2902B7C6FDB871C968ED4E61A11CBBEC7B063AC2A54F
+  Data{
+    
+  }#
+  EvidenceData{
+    
+  }#
+  Commit{
+    BlockID:    7FF830B170620A08907336FC6BF03A58E1E9BFAEAE84940E6277BCBBA538DBB3:1:BB4BBFF25B42
+    Precommits:
+      Vote{0:924E10D9BAB7 32/00/2(Precommit) 7FF830B17062 2BC9294D7220 @ 2019-06-26T09:54:11.668866432Z}
+  }#7C5DD2CAB6785975BD3DB4C5FA79E836933129CC3193EE6150463D7F3F4BECAB
+}#30E3808051F93A21E03B2902B7C6FDB871C968ED4E61A11CBBEC7B063AC2A54F engine=consensus module=consensus
+~/goApps/src/github.com/lightstreams-network/lightchain
+Execution completed
+➜  lightchain git:(186_app_consensus_failure) ✗ ./scripts/run.sh --standalone --debug
+~/goApps/src/github.com/lightstreams-network/lightchain ~/goApps/src/github.com/lightstreams-network/lightchain
+Compiling latest version....
+make build-dev
+CGO_ENABLED=1 go build -gcflags=all="-N -l" -o ./build/lightchain ./cmd/lightchain
+dlv --listen=:2345 --headless=true --api-version=2 exec ./build/lightchain -- run --datadir=/home/ggarrido/.lightchain/standalone --rpc --rpcaddr 0.0.0.0 --rpcport 8545 --rpcapi eth,net,web3,personal,debug --ws --wsaddr 0.0.0.0 --wsport 8556  --wsapi eth,net,web3,personal,debug --wsorigins=* --tmt_rpc_port=26657 --tmt_p2p_port=26656 --prometheus --lvl=debug
+API server listening at: [::]:2345
+INFO [06-26|12:24:16.460] Launching Lightchain node...             module=lightchain
+Using config file: /home/ggarrido/.lightchain/standalone/consensus/config/config.toml
+INFO [06-26|12:24:16.464] Maximum peer count                       ETH=25 LES=0 total=25
+DEBUG[06-26|12:24:16.464] FS scan times                            list=77.611µs set=31.273µs diff=3.764µs
+DEBUG[06-26|12:24:16.468] Creating new prometheus node instance from config... engine=node
+DEBUG[06-26|12:24:16.468] Creating new consensus node instance from config... engine=node
+DEBUG[06-26|12:24:16.468] Creating new database node instance from config and creates a keystore dir... engine=node
+DEBUG[06-26|12:24:16.469] FS scan times                            list=53.097µs set=18.579µs diff=2.827µs
+DEBUG[06-26|12:24:16.469] Binding ethereum events to rpc client... engine=database
+DEBUG[06-26|12:24:16.470] Starting lightchain node...              module=lightchain
+INFO [06-26|12:24:16.470] Starting database engine...              engine=node
+DEBUG[06-26|12:24:16.470] Starting ethereum node                   engine=database
+INFO [06-26|12:24:16.470] Starting peer-to-peer node               instance=./v1.8.27/linux-amd64/go1.10.3
+DEBUG[06-26|12:24:16.470] Registering database...                  engine=database
+INFO [06-26|12:24:16.470] Allocated cache and file handles         database=/home/ggarrido/.lightchain/standalone/database/chaindata cache=256 handles=524288
+DEBUG[06-26|12:24:16.496] Trie cache stats after commit            misses=0 unloads=0
+INFO [06-26|12:24:16.496] Persisted trie from memory database      nodes=1 size=151.00B time=35.342µs gcnodes=0 gcsize=0.00B gctime=0s livenodes=1 livesize=0.00B
+INFO [06-26|12:24:16.496] Initialised chain configuration          config="{ChainID: 161 Homestead: <nil> DAO: <nil> DAOSupport: false EIP150: 0 EIP155: 0 EIP158: 0 Byzantium: 0 Constantinople: <nil>  ConstantinopleFix: <nil> Engine: unknown}"
+WARN [06-26|12:24:16.496] Ethash used in fake mode 
+INFO [06-26|12:24:16.496] Initialising Ethereum protocol           versions="[63 62]" network=161
+INFO [06-26|12:24:16.529] Loaded most recent local header          number=32 hash=5b59f4…85c8bd td=4203200 age=30m22s
+INFO [06-26|12:24:16.529] Loaded most recent local full block      number=32 hash=5b59f4…85c8bd td=4203200 age=30m22s
+INFO [06-26|12:24:16.529] Loaded most recent local fast block      number=32 hash=5b59f4…85c8bd td=4203200 age=30m22s
+DEBUG[06-26|12:24:16.529] Reinjecting stale transactions           count=0
+WARN [06-26|12:24:16.529] Blockchain not empty, fast sync disabled 
+DEBUG[06-26|12:24:16.530] Recalculated downloader QoS values       rtt=20s confidence=1.000 ttl=1m0s
+DEBUG[06-26|12:24:16.554] InProc registered                        namespace=admin
+DEBUG[06-26|12:24:16.554] InProc registered                        namespace=admin
+DEBUG[06-26|12:24:16.554] InProc registered                        namespace=debug
+DEBUG[06-26|12:24:16.554] InProc registered                        namespace=debug
+DEBUG[06-26|12:24:16.554] InProc registered                        namespace=web3
+DEBUG[06-26|12:24:16.555] InProc registered                        namespace=eth
+DEBUG[06-26|12:24:16.555] InProc registered                        namespace=eth
+DEBUG[06-26|12:24:16.555] InProc registered                        namespace=eth
+DEBUG[06-26|12:24:16.555] InProc registered                        namespace=txpool
+DEBUG[06-26|12:24:16.555] InProc registered                        namespace=debug
+DEBUG[06-26|12:24:16.555] InProc registered                        namespace=debug
+DEBUG[06-26|12:24:16.555] InProc registered                        namespace=eth
+DEBUG[06-26|12:24:16.555] InProc registered                        namespace=personal
+DEBUG[06-26|12:24:16.555] InProc registered                        namespace=eth
+DEBUG[06-26|12:24:16.556] InProc registered                        namespace=ethash
+DEBUG[06-26|12:24:16.556] InProc registered                        namespace=eth
+DEBUG[06-26|12:24:16.556] InProc registered                        namespace=eth
+DEBUG[06-26|12:24:16.556] InProc registered                        namespace=eth
+DEBUG[06-26|12:24:16.556] InProc registered                        namespace=debug
+INFO [06-26|12:24:16.556] New local node record                    seq=4 id=15184d9f5f677826 ip=127.0.0.1 udp=0 tcp=30303
+INFO [06-26|12:24:16.556] Started P2P networking                   self="enode://9e5c4ebae1f26d07ed437d007007739e43bccc3bf6fd5d8dea5c4a747b3f6902275dcf9a2aea6dba8d8ffb37fa45457cded0a1c98c79fce7c7f0f9c1efc8ff99@127.0.0.1:30303?discport=0"
+DEBUG[06-26|12:24:16.556] InProc registered                        namespace=debug
+INFO [06-26|12:24:16.556] Waiting for tendermint endpoint to start engine=database err="Consensus node is not running" result="{NodeInfo:{ProtocolVersion:{P2P:0 Block:0 App:0} ID_: ListenAddr: Network: Version: Channels: Moniker: Other:{TxIndex: RPCAddress:}} SyncInfo:{LatestBlockHash: LatestAppHash: LatestBlockHeight:0 LatestBlockTime:0001-01-01 00:00:00 +0000 UTC CatchingUp:false} ValidatorInfo:{Address: PubKey:<nil> VotingPower:0}}"
+DEBUG[06-26|12:24:16.556] InProc registered                        namespace=net
+DEBUG[06-26|12:24:16.556] IPC registered                           namespace=admin
+DEBUG[06-26|12:24:16.556] IPC registered                           namespace=admin
+DEBUG[06-26|12:24:16.556] TCP listener up                          addr=[::]:30303
+DEBUG[06-26|12:24:16.557] IPC registered                           namespace=debug
+DEBUG[06-26|12:24:16.557] IPC registered                           namespace=debug
+DEBUG[06-26|12:24:16.557] IPC registered                           namespace=web3
+DEBUG[06-26|12:24:16.557] IPC registered                           namespace=eth
+DEBUG[06-26|12:24:16.557] IPC registered                           namespace=eth
+DEBUG[06-26|12:24:16.557] IPC registered                           namespace=eth
+DEBUG[06-26|12:24:16.557] IPC registered                           namespace=txpool
+DEBUG[06-26|12:24:16.557] IPC registered                           namespace=debug
+DEBUG[06-26|12:24:16.557] IPC registered                           namespace=debug
+DEBUG[06-26|12:24:16.557] IPC registered                           namespace=eth
+DEBUG[06-26|12:24:16.557] IPC registered                           namespace=personal
+DEBUG[06-26|12:24:16.557] IPC registered                           namespace=eth
+DEBUG[06-26|12:24:16.557] IPC registered                           namespace=ethash
+DEBUG[06-26|12:24:16.557] IPC registered                           namespace=eth
+DEBUG[06-26|12:24:16.557] IPC registered                           namespace=eth
+DEBUG[06-26|12:24:16.557] IPC registered                           namespace=eth
+DEBUG[06-26|12:24:16.557] IPC registered                           namespace=debug
+DEBUG[06-26|12:24:16.558] IPC registered                           namespace=debug
+DEBUG[06-26|12:24:16.558] IPC registered                           namespace=net
+INFO [06-26|12:24:16.558] IPC endpoint opened                      url=/home/ggarrido/.lightchain/standalone/database/geth.ipc
+DEBUG[06-26|12:24:16.558] HTTP registered                          namespace=debug
+DEBUG[06-26|12:24:16.558] HTTP registered                          namespace=debug
+DEBUG[06-26|12:24:16.558] HTTP registered                          namespace=web3
+DEBUG[06-26|12:24:16.558] HTTP registered                          namespace=eth
+DEBUG[06-26|12:24:16.558] HTTP registered                          namespace=eth
+DEBUG[06-26|12:24:16.558] HTTP registered                          namespace=eth
+DEBUG[06-26|12:24:16.558] HTTP registered                          namespace=debug
+DEBUG[06-26|12:24:16.558] HTTP registered                          namespace=debug
+DEBUG[06-26|12:24:16.558] HTTP registered                          namespace=eth
+DEBUG[06-26|12:24:16.558] HTTP registered                          namespace=personal
+DEBUG[06-26|12:24:16.559] HTTP registered                          namespace=eth
+DEBUG[06-26|12:24:16.559] HTTP registered                          namespace=eth
+DEBUG[06-26|12:24:16.559] HTTP registered                          namespace=eth
+DEBUG[06-26|12:24:16.559] HTTP registered                          namespace=eth
+DEBUG[06-26|12:24:16.559] HTTP registered                          namespace=debug
+DEBUG[06-26|12:24:16.559] HTTP registered                          namespace=debug
+DEBUG[06-26|12:24:16.559] HTTP registered                          namespace=net
+INFO [06-26|12:24:16.559] HTTP endpoint opened                     url=http://0.0.0.0:8545                                     cors= vhosts=localhost
+DEBUG[06-26|12:24:16.559] WebSocket registered                     service="&{mu:{state:0 sema:0} cpuW:<nil> cpuFile: traceW:<nil> traceFile:}" namespace=debug
+DEBUG[06-26|12:24:16.559] WebSocket registered                     service=&{node:0xc420434f00}                                                 namespace=debug
+DEBUG[06-26|12:24:16.559] WebSocket registered                     service=&{stack:0xc420434f00}                                                namespace=web3
+DEBUG[06-26|12:24:16.559] WebSocket registered                     service=&{b:0xc4200b7d70}                                                    namespace=eth
+DEBUG[06-26|12:24:16.560] WebSocket registered                     service=&{b:0xc4200b7d70}                                                    namespace=eth
+DEBUG[06-26|12:24:16.561] WebSocket registered                     service="&{b:0xc4200b7d70 nonceLock:0xc420222920}"                           namespace=eth
+DEBUG[06-26|12:24:16.561] WebSocket registered                     service=&{b:0xc4200b7d70}                                                    namespace=debug
+DEBUG[06-26|12:24:16.561] WebSocket registered                     service=&{b:0xc4200b7d70}                                                    namespace=debug
+DEBUG[06-26|12:24:16.561] WebSocket registered                     service=&{am:0xc4201ca680}                                                   namespace=eth
+DEBUG[06-26|12:24:16.561] WebSocket registered                     service="&{am:0xc4201ca680 nonceLock:0xc420222920 b:0xc4200b7d70}"           namespace=personal
+DEBUG[06-26|12:24:16.561] WebSocket registered                     service=&{ethash:0xc42038a2a0}                                               namespace=eth
+DEBUG[06-26|12:24:16.561] WebSocket registered                     service="&{chainID:0xc4201c8260 e:0xc42038a380 consAPI:0xc4201c8120}"        namespace=eth
+DEBUG[06-26|12:24:16.561] WebSocket registered                     service="&{d:0xc4202149c0 mux:0xc4200ef3e0 installSyncSubscription:0xc4202559e0 uninstallSyncSubscription:0xc420255a40}" namespace=eth
+DEBUG[06-26|12:24:16.561] WebSocket registered                     service="&{backend:0xc4200b7d70 mux:0xc4200ef3e0 quit:<nil> chainDb:0xc42042c210 events:0xc420431e00 filtersMu:{state:0 sema:0} filters:map[]}" namespace=eth
+DEBUG[06-26|12:24:16.562] WebSocket registered                     service=&{eth:0xc42038a380}                                                                                                                     namespace=debug
+DEBUG[06-26|12:24:16.562] WebSocket registered                     service="&{config:0xc4203478c0 eth:0xc42038a380}"                                                                                               namespace=debug
+DEBUG[06-26|12:24:16.562] WebSocket registered                     service=&{NetworkVersion:161}                                                                                                                   namespace=net
+DEBUG[06-26|12:24:16.562] Allowed origin(s) for WS RPC interface [*]
+ 
+INFO [06-26|12:24:16.562] WebSocket endpoint opened                url=ws://[::]:8556
+DEBUG[06-26|12:24:16.562] Stopping p2p communication of ethereum node engine=database
+DEBUG[06-26|12:24:16.562] Read error                               err="accept tcp [::]:30303: use of closed network connection"
+DEBUG[06-26|12:24:18.655] Couldn't add port mapping                proto=tcp extport=30303 intport=30303 interface="UPnP or NAT-PMP" err="no UPnP or NAT-PMP router discovered"
+DEBUG[06-26|12:24:18.655] Deleting port mapping                    proto=tcp extport=30303 intport=30303 interface="UPnP or NAT-PMP"
+DEBUG[06-26|12:24:18.655] Register wallet event handlers to open and auto-derive wallets engine=database
+DEBUG[06-26|12:24:18.655] Validate ethereum service is running...  engine=database
+INFO [06-26|12:24:18.655] Started database engine...               engine=database
+INFO [06-26|12:24:18.655] Starting consensus engine...             engine=node
+DEBUG[06-26|12:24:18.655] Creating tendermint ABCI application...  engine=consensus
+DEBUG[06-26|12:24:18.655] Resetting DB BlockState                  engine=database  receiver=0x0000000000000000000000000000000000000000
+DEBUG[06-26|12:24:18.655] Creating tendermint node...              engine=consensus
+INFO [06-26|12:24:18.656] Loading database 'blockstore'...         engine=consensus
+INFO [06-26|12:24:18.679] Loading database 'state'...              engine=consensus
+INFO [06-26|12:24:18.710] Starting multiAppConn                    engine=consensus module=proxy      impl=multiAppConn
+INFO [06-26|12:24:18.710] Starting localClient                     engine=consensus module=proxy      module=abci-client connection=query impl=localClient
+INFO [06-26|12:24:18.710] Starting localClient                     engine=consensus module=proxy       module=abci-client connection=mempool impl=localClient
+INFO [06-26|12:24:18.710] Starting localClient                     engine=consensus module=proxy       module=abci-client connection=consensus impl=localClient
+INFO [06-26|12:24:18.710] Starting EventBus                        engine=consensus module=events      impl=EventBus
+INFO [06-26|12:24:18.711] Starting PubSub                          engine=consensus module=events      module=pubsub      impl=PubSub
+INFO [06-26|12:24:18.711] Loading database 'tx_index'...           engine=consensus
+INFO [06-26|12:24:18.730] Starting IndexerService                  engine=consensus module=txindex     impl=IndexerService
+INFO [06-26|12:24:20.280] State info                               engine=consensus module=ABCI        data="{Version:0.31.5 BlockVersion:10 P2PVersion:7 XXX_NoUnkeyedLiteral:{} XXX_unrecognized:[] XXX_sizecache:0}" height=32
+INFO [06-26|12:24:20.281] ABCI Handshake App Info                  engine=consensus module=consensus   height=32 hash=A2615A26B2319A61A03ABED2792A24D9CE76B46F54969440426DE3469A7A4F63 software-version= protocol-version=0
+INFO [06-26|12:24:20.281] Waiting for tendermint endpoint to start engine=database  err="Consensus node is not running"                           result="{NodeInfo:{ProtocolVersion:{P2P:0 Block:0 App:0} ID_: ListenAddr: Network: Version: Channels: Moniker: Other:{TxIndex: RPCAddress:}} SyncInfo:{LatestBlockHash: LatestAppHash: LatestBlockHeight:0 LatestBlockTime:0001-01-01 00:00:00 +0000 UTC CatchingUp:false} ValidatorInfo:{Address: PubKey:<nil> VotingPower:0}}"
+INFO [06-26|12:24:20.291] ABCI Replay Blocks                       engine=consensus module=consensus   appHeight=32 storeHeight=33 stateHeight=32
+INFO [06-26|12:24:20.291] Replay last block using real app         engine=consensus module=consensus
+DEBUG[06-26|12:24:21.329] Beginning new block                      engine=consensus module=ABCI        hash="[48 227 128 128 81 249 58 33 224 59 41 2 183 198 253 184 113 201 104 237 78 97 161 28 187 236 123 6 58 194 165 79]"
+DEBUG[06-26|12:24:22.541] Ending new block at height '33'          engine=consensus module=ABCI
+INFO [06-26|12:24:22.541] Executed block                           engine=consensus module=consensus   height=33 validTxs=0 invalidTxs=0
+INFO [06-26|12:24:23.638] Persisting DB Block                      engine=database  data="{header:0xc4231ecfc0 parent:0xc420346cf0 state:0xc4201cb380 txIndex:0 transactions:[] receipts:[] totalUsedGas:0 gp:0xc4202470a8}"
+DEBUG[06-26|12:24:23.638] Trie cache stats after commit            misses=0 unloads=0
+ERROR[06-26|12:24:23.638] 
+########## BAD BLOCK #########
+Chain config: {ChainID: 161 Homestead: <nil> DAO: <nil> DAOSupport: false EIP150: 0 EIP155: 0 EIP158: 0 Byzantium: 0 Constantinople: <nil>  ConstantinopleFix: <nil> Engine: unknown}
+
+Number: 33
+Hash: 0x300fc1b6843da58bb878d15ab130babba1d6999636f5cade8ab1cb94c2546c7a
+
+
+Error: timestamp equals parent's
+##############################
+ 
+ERROR[06-26|12:24:23.638] Error getting latest database state      engine=consensus module=ABCI        err="timestamp equals parent's"
+INFO [06-26|12:24:23.638] Waiting for tendermint endpoint to start engine=database  err="Consensus node is not running"                           result="{NodeInfo:{ProtocolVersion:{P2P:0 Block:0 App:0} ID_: ListenAddr: Network: Version: Channels: Moniker: Other:{TxIndex: RPCAddress:}} SyncInfo:{LatestBlockHash: LatestAppHash: LatestBlockHeight:0 LatestBlockTime:0001-01-01 00:00:00 +0000 UTC CatchingUp:false} ValidatorInfo:{Address: PubKey:<nil> VotingPower:0}}"
+Node resulted in panic: timestamp equals parent's. 
+goroutine 1 [running]:
+runtime/debug.Stack(0x0, 0x0, 0x0)
+	/home/ggarrido/Software/go/src/runtime/debug/stack.go:24 +0xb1
+main.main.func1()
+	/home/ggarrido/goApps/src/github.com/lightstreams-network/lightchain/cmd/lightchain/main.go:45 +0x63
+panic(0x161b480, 0xc420077680)
+	/home/ggarrido/Software/go/src/runtime/panic.go:502 +0x24a
+github.com/lightstreams-network/lightchain/consensus.(*TendermintABCI).Commit(0xc4200ecf00, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0)
+	/home/ggarrido/goApps/src/github.com/lightstreams-network/lightchain/consensus/abci.go:270 +0xac6
+github.com/lightstreams-network/lightchain/vendor/github.com/tendermint/tendermint/abci/client.(*localClient).CommitSync(0xc42036c7e0, 0x0, 0x0, 0x0)
+	/home/ggarrido/goApps/src/github.com/lightstreams-network/lightchain/vendor/github.com/tendermint/tendermint/abci/client/local_client.go:215 +0xca
+github.com/lightstreams-network/lightchain/vendor/github.com/tendermint/tendermint/proxy.(*appConnConsensus).CommitSync(0xc42002d630, 0x0, 0x0, 0x0)
+	/home/ggarrido/goApps/src/github.com/lightstreams-network/lightchain/vendor/github.com/tendermint/tendermint/proxy/app_conn.go:81 +0x5d
+github.com/lightstreams-network/lightchain/vendor/github.com/tendermint/tendermint/state.(*BlockExecutor).Commit(0xc420377650, 0xa, 0x0, 0xc420209490, 0x6, 0xc4203b6860, 0x11, 0x21, 0x0, 0xc4200409e0, ...)
+	/home/ggarrido/goApps/src/github.com/lightstreams-network/lightchain/vendor/github.com/tendermint/tendermint/state/execution.go:199 +0x2c6
+github.com/lightstreams-network/lightchain/vendor/github.com/tendermint/tendermint/state.(*BlockExecutor).ApplyBlock(0xc420377650, 0xa, 0x0, 0xc420209490, 0x6, 0xc4203b6860, 0x11, 0x21, 0x0, 0xc4200409e0, ...)
+	/home/ggarrido/goApps/src/github.com/lightstreams-network/lightchain/vendor/github.com/tendermint/tendermint/state/execution.go:154 +0xca2
+github.com/lightstreams-network/lightchain/vendor/github.com/tendermint/tendermint/consensus.(*Handshaker).replayBlock(0xc423623c80, 0xa, 0x0, 0xc420209490, 0x6, 0xc4203b6860, 0x11, 0x20, 0x0, 0xc4203b6880, ...)
+	/home/ggarrido/goApps/src/github.com/lightstreams-network/lightchain/vendor/github.com/tendermint/tendermint/consensus/replay.go:449 +0x284
+github.com/lightstreams-network/lightchain/vendor/github.com/tendermint/tendermint/consensus.(*Handshaker).ReplayBlocks(0xc423623c80, 0xa, 0x0, 0xc420209490, 0x6, 0xc4203b6860, 0x11, 0x20, 0x0, 0xc4203b6880, ...)
+	/home/ggarrido/goApps/src/github.com/lightstreams-network/lightchain/vendor/github.com/tendermint/tendermint/consensus/replay.go:379 +0x14ab
+github.com/lightstreams-network/lightchain/vendor/github.com/tendermint/tendermint/consensus.(*Handshaker).Handshake(0xc423623c80, 0x1aa33a0, 0xc4203d9260, 0x0, 0x0)
+	/home/ggarrido/goApps/src/github.com/lightstreams-network/lightchain/vendor/github.com/tendermint/tendermint/consensus/replay.go:264 +0x957
+github.com/lightstreams-network/lightchain/vendor/github.com/tendermint/tendermint/node.NewNode(0xc420103cc0, 0x1a95760, 0xc4200ecfa0, 0xc4200e7510, 0x1a87780, 0xc42366ed60, 0xc42002e4c0, 0xc424b53a80, 0xc42002e4d0, 0x1a991e0, ...)
+	/home/ggarrido/goApps/src/github.com/lightstreams-network/lightchain/vendor/github.com/tendermint/tendermint/node/node.go:266 +0x11e2
+github.com/lightstreams-network/lightchain/consensus.(*Node).Start(0xc4203477a0, 0xc420249c80, 0xc4202129c0, 0x0, 0x0)
+	/home/ggarrido/goApps/src/github.com/lightstreams-network/lightchain/consensus/node.go:68 +0x471
+github.com/lightstreams-network/lightchain/node.(*Node).Start(0xc4200ef8c0, 0x0, 0x0)
+	/home/ggarrido/goApps/src/github.com/lightstreams-network/lightchain/node/node.go:56 +0x16d
+main.runCmd.func2(0xc420340780, 0xc420103b80, 0x0, 0x14)
+	/home/ggarrido/goApps/src/github.com/lightstreams-network/lightchain/cmd/lightchain/run.go:124 +0x1254
+github.com/lightstreams-network/lightchain/vendor/github.com/spf13/cobra.(*Command).execute(0xc420340780, 0xc420103a40, 0x14, 0x14, 0x0, 0x0)
+	/home/ggarrido/goApps/src/github.com/lightstreams-network/lightchain/vendor/github.com/spf13/cobra/command.go:766 +0xe80
+github.com/lightstreams-network/lightchain/vendor/github.com/spf13/cobra.(*Command).ExecuteC(0xc420263b80, 0xc420340780, 0x0, 0x0)
+	/home/ggarrido/goApps/src/github.com/lightstreams-network/lightchain/vendor/github.com/spf13/cobra/command.go:852 +0x6d7
+github.com/lightstreams-network/lightchain/vendor/github.com/spf13/cobra.(*Command).Execute(0xc420263b80, 0x0, 0x0)
+	/home/ggarrido/goApps/src/github.com/lightstreams-network/lightchain/vendor/github.com/spf13/cobra/command.go:800 +0x3b
+main.main()
+	/home/ggarrido/goApps/src/github.com/lightstreams-network/lightchain/cmd/lightchain/main.go:50 +0x6d
