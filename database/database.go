@@ -20,6 +20,7 @@ import (
 	
 	"github.com/lightstreams-network/lightchain/database/metrics"
 	"github.com/lightstreams-network/lightchain/database/web3"
+	"time"
 )
 
 // Database manages the underlying ethereum state for storage and processing
@@ -88,23 +89,46 @@ func (db *Database) Persist(receiver common.Address) (ethTypes.Block, error) {
 	db.metrics.PersistedTxsTotal.Add(float64(len(db.ethState.blockState.transactions)))
 	db.metrics.ChaindbHeight.Set(float64(db.ethState.blockState.header.Number.Uint64()))
 
-	return db.ethState.Persist(receiver)
+	return db.ethState.Persist(*db.eth.APIBackend.ChainConfig(), receiver)
 }
 
 // ResetBlockState resets the in-memory block's processing state.
 func (db *Database) ResetBlockState(receiver common.Address) error { 
 	db.logger.Debug("Resetting DB BlockState", "receiver", receiver.Hex())
-	return db.ethState.ResetBlockState(receiver)
+	return db.ethState.ResetBlockState(*db.eth.APIBackend.ChainConfig(), receiver)
 }
 
 // UpdateBlockState uses the tendermint header to update the eth header.
-func (db *Database) UpdateBlockState(tmHeader *tmtAbciTypes.Header) {
+func (db *Database) UpdateBlockState(tmHeader tmtAbciTypes.Header) error {
 	db.logger.Debug("Updating DB BlockState")
-	db.ethState.UpdateBlockState(
-		db.eth.APIBackend.ChainConfig(),
+	err := db.ethState.UpdateBlockState(
+		*db.eth.APIBackend.ChainConfig(),
 		uint64(tmHeader.Time.Unix()),
 		uint64(tmHeader.GetNumTxs()),
 	)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (db *Database) InvalidBlockState() bool {
+	return db.ethState.blockState.isInvalid == true
+}
+
+// TO REMOVE: test code 
+// func (db *Database) ParentBlockTime() time.Time {
+// 	return time.Unix(int64(db.ethState.blockState.parent.Time()), 0)
+// }
+
+func (db *Database) ParentBlockRoot() common.Hash {
+	return db.ethState.blockState.parent.Root()
+}
+
+func (db *Database) GetBlockStateHeader() ethTypes.Header {
+	return *db.ethState.blockState.header
 }
 
 // GasLimit returns the maximum gas per block.

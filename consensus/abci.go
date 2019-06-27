@@ -20,6 +20,7 @@ import (
 
 // maxTransactionSize is 32KB in order to prevent DOS attacks
 const maxTransactionSize = 32768
+const minBlockDurationInSeconds int64 = 1;
 
 // TendermintABCI is the main hook of application layer (blockchain) for connecting to consensus (Tendermint) using ABCI.
 //
@@ -30,12 +31,12 @@ const maxTransactionSize = 32768
 //    Info Connection - Info, SetOption, Query
 //
 // Flow:
-//		1. BeginBlock
-//		2. CheckTx
-//	    3. DeliverTx
-//		4. EndBlock
-//		5. Commit
-//		6. CheckTx (clean mempool from TXs not included in committed block)
+// 		1. BeginBlock
+// 		2. CheckTx
+// 	    3. DeliverTx
+// 		4. EndBlock
+// 		5. Commit
+// 		6. CheckTx (clean mempool from TXs not included in committed block)
 //
 // Tendermint runs CheckTx and DeliverTx concurrently with each other,
 // though on distinct ABCI connections - the mempool connection and the consensus connection.
@@ -97,10 +98,23 @@ func (abci *TendermintABCI) InitChain(req tmtAbciTypes.RequestInitChain) tmtAbci
 // for the validators.
 //
 // Response:
-//		- Optional Key-Value tags for filtering and indexing
+// 		- Optional Key-Value tags for filtering and indexing
 func (abci *TendermintABCI) BeginBlock(req tmtAbciTypes.RequestBeginBlock) tmtAbciTypes.ResponseBeginBlock {
 	abci.logger.Debug("Beginning new block", "hash", req.Hash)
-	abci.db.UpdateBlockState(&req.Header)
+
+	// TO REMOVE: test code
+	// if req.Header.Height == 3 {
+	// 	req.Header.Time = abci.db.ParentBlockTime()
+	// }
+
+	err := abci.db.UpdateBlockState(req.Header)
+
+	// Note: Tendermint does not expect errors from BeginBlock. In case this block is achieve consensus 
+	// the database chain will end up corrupted, therefore skip block seems to be the only alternative
+	// ISSUE: https://github.com/tendermint/tendermint/issues/3755
+	if err != nil {
+		abci.logger.Error("Invalid block", "height", req.Header.Height, "msg", err.Error())
+	}
 
 	return tmtAbciTypes.ResponseBeginBlock{}
 }
@@ -120,11 +134,17 @@ func (abci *TendermintABCI) BeginBlock(req tmtAbciTypes.RequestBeginBlock) tmtAb
 // and start sending CheckTx again.
 //
 // Response:
-//		- Response code
-//		- Optional Key-Value tags for filtering and indexing
+// 		- Response code
+// 		- Optional Key-Value tags for filtering and indexing
 func (abci *TendermintABCI) CheckTx(txBytes []byte) tmtAbciTypes.ResponseCheckTx {
 	abci.metrics.CheckTxsTotal.Add(1)
-	
+
+	if abci.db.InvalidBlockState() {
+		abci.logger.Error("Cannot checkTX on invalid block")
+		abci.metrics.CheckErrTxsTotal.Add(1, "INVALID_BLOCK")
+		return tmtAbciTypes.ResponseCheckTx{Code: 1, Log: "INVALID_BLOCK"}
+	}
+
 	tx, err := decodeRLP(txBytes)
 	if err != nil {
 		abci.logger.Error("Unable to decode RLP TX", "err", err.Error())
@@ -174,7 +194,7 @@ func (abci *TendermintABCI) CheckTx(txBytes []byte) tmtAbciTypes.ResponseCheckTx
 		abci.checkTxState.AddBalance(*to, tx.Value())
 	}
 
-	abci.checkTxState.SetNonce(from, tx.Nonce() + 1)
+	abci.checkTxState.SetNonce(from, tx.Nonce()+1)
 
 	abci.logger.Info("TX validated", "hash", tx.Hash().String(), "state_nonce", abci.checkTxState.GetNonce(from))
 
@@ -214,11 +234,18 @@ func (abci *TendermintABCI) doMempoolValidation(tx *ethTypes.Transaction, from c
 // DeliverTx executes the transaction against Ethereum block's work state.
 //
 // Response:
-//		- If the transaction is valid, returns CodeType.OK
-//		- Keys and values in Tags must be UTF-8 encoded strings
+// 		- If the transaction is valid, returns CodeType.OK
+// 		- Keys and values in Tags must be UTF-8 encoded strings
 // 		  E.g: ("account.owner": "Bob", "balance": "100.0", "time": "2018-01-02T12:30:00Z")
 func (abci *TendermintABCI) DeliverTx(txBytes []byte) tmtAbciTypes.ResponseDeliverTx {
 	abci.metrics.DeliverTxsTotal.Add(1)
+
+	if abci.db.InvalidBlockState() {
+		abci.logger.Error("Cannot DeliverTx on invalid block")
+		abci.metrics.DeliverErrTxsTotal.Add(1, "INVALID_BLOCK")
+		return tmtAbciTypes.ResponseDeliverTx{Code: 1, Log: "INVALID_BLOCK"}
+	}
+
 	tx, err := decodeRLP(txBytes)
 	if err != nil {
 		abci.logger.Error(err.Error())
@@ -246,12 +273,19 @@ func (abci *TendermintABCI) DeliverTx(txBytes []byte) tmtAbciTypes.ResponseDeliv
 //
 // Response:
 // 		- Validator updates returned for block H
-//			- apply to the NextValidatorsHash of block H+1
-//			- apply to the ValidatorsHash (and thus the validator set) for block H+2
-//			- apply to the RequestBeginBlock.LastCommitInfo (ie. the last validator set) for block H+3
-//		- Consensus params returned for block H apply for block H+1
+// 			- apply to the NextValidatorsHash of block H+1
+// 			- apply to the ValidatorsHash (and thus the validator set) for block H+2
+// 			- apply to the RequestBeginBlock.LastCommitInfo (ie. the last validator set) for block H+3
+// 		- Consensus params returned for block H apply for block H+1
 func (abci *TendermintABCI) EndBlock(req tmtAbciTypes.RequestEndBlock) tmtAbciTypes.ResponseEndBlock {
 	abci.logger.Debug(fmt.Sprintf("Ending new block at height '%d'", req.Height))
+
+	// bDurationInSec := time.Now().Unix() - int64(abci.db.GetBlockStateHeader().Time)
+	// if bDurationInSec < minBlockDurationInSeconds {
+	// 	sleepDurationInSec := time.Duration(minBlockDurationInSeconds - bDurationInSec)
+	// 	abci.logger.Debug(fmt.Sprintf("Waiting for %d seconds to end block...", sleepDurationInSec))
+	// 	time.Sleep(sleepDurationInSec * time.Second)
+	// }
 
 	return tmtAbciTypes.ResponseEndBlock{}
 }
@@ -259,18 +293,25 @@ func (abci *TendermintABCI) EndBlock(req tmtAbciTypes.RequestEndBlock) tmtAbciTy
 // Commit persists the application state.
 //
 // Response:
-//		- Return a Merkle root hash of the application state.
-//	      It's critical that all application instances return the same hash. If not, they will not be able
+// 		- Return a Merkle root hash of the application state.
+// 	      It's critical that all application instances return the same hash. If not, they will not be able
 // 		  to agree on the next block, because the hash is included in the next block!
 func (abci *TendermintABCI) Commit() tmtAbciTypes.ResponseCommit {
-	abci.metrics.CommitBlockTotal.Add(1)
+	if abci.db.InvalidBlockState() {
+		abci.logger.Error("Invalid bloc, persisting an empty valid block...")
+		abci.ResetBlockState()
+	}
+
 	block, err := abci.db.Persist(abci.RewardReceiver())
 	if err != nil {
 		abci.logger.Error("Error getting latest database state", "err", err)
 		abci.metrics.CommitErrBlockTotal.Add(1, "UNABLE_TO_PERSIST")
-		panic(err)
+		// panic(err)
+		abci.ResetBlockState()
+		return tmtAbciTypes.ResponseCommit{Data: abci.db.ParentBlockRoot().Bytes()}
 	}
 
+	abci.metrics.CommitBlockTotal.Add(1)
 	ethState, err := abci.getCurrentDBState()
 	if err != nil {
 		abci.logger.Error("Error getting next latest state", "err", err)

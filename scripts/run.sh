@@ -24,6 +24,10 @@ while [ "$1" != "" ]; do
         --standalone) 
             NETWORK="standalone"
         ;;
+        --standalone-client) 
+            NETWORK="standalone"
+            IS_CLIENT=true
+        ;;
         --mainnet) 
             NETWORK="mainnet" 
         ;;
@@ -43,7 +47,13 @@ RUN_ARGS="--datadir=${DATA_DIR}"
 RUN_ARGS="${RUN_ARGS} --rpc --rpcaddr 0.0.0.0 --rpcport 8545 --rpcapi eth,net,web3,personal,debug"
 RUN_ARGS="${RUN_ARGS} --ws --wsaddr 0.0.0.0 --wsport 8556  --wsapi eth,net,web3,personal,debug --wsorigins=*"
 RUN_ARGS="${RUN_ARGS} --tmt_rpc_port=26657 --tmt_p2p_port=26656"
-RUN_ARGS="${RUN_ARGS} --prometheus"
+
+if [ -n "${IS_CLIENT}" ]; then
+RUN_ARGS="--datadir=${DATA_DIR}"
+RUN_ARGS="${RUN_ARGS} --rpc --rpcaddr 0.0.0.0 --rpcport 9545 --rpcapi eth,net,web3,personal,debug"
+RUN_ARGS="${RUN_ARGS} --ws --wsaddr 0.0.0.0 --wsport 9556  --wsapi eth,net,web3,personal,debug --wsorigins=*"
+RUN_ARGS="${RUN_ARGS} --tmt_rpc_port=27657 --tmt_p2p_port=27656"
+fi
 
 pushd "$ROOT_PATH"
 
@@ -66,7 +76,7 @@ if [ -n "${CLEAN}" ]; then
 	    run "rm -rf ${DATA_DIR}"
 		run "$EXEC_BIN init ${INIT_ARGS}"
 		echo "Restoring ${NETWORK} private keys"
-		run "cp ./network/${NETWORK}/database/keystore/* ${DATA_DIR}/database/keystore/"		
+		run "rsync -avzh --ignore-errors ./network/${NETWORK}/database/keystore/ ${DATA_DIR}/database/keystore"
 		echo -e "################################ \n"
 	else
 		echo -e "Exiting"

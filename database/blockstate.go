@@ -28,6 +28,7 @@ type blockState struct {
 	txIndex      int
 	transactions []*ethTypes.Transaction
 	receipts     ethTypes.Receipts
+	isInvalid    bool
 
 	totalUsedGas uint64
 	gp           *core.GasPool
@@ -41,6 +42,12 @@ type blockState struct {
 // Logic copied from `core/state_processor.go` `(p *StateProcessor) Process` that gets
 // normally executed on block persist.
 func (bs *blockState) execTx(bc *core.BlockChain, config *eth.Config, chainConfig *params.ChainConfig, blockHash common.Hash, tx *ethTypes.Transaction) tmtAbciTypes.ResponseDeliverTx {
+	if bs.isInvalid == true {
+		return tmtAbciTypes.ResponseDeliverTx{
+			Code: tmtCode.CodeTypeEncodingError, 
+			Log: fmt.Sprintf("Cannot exec tx in this isInvalid block %d", bs.header.Number.Int64())}
+	}
+
 	// TODO: Investigate if snapshot should be used `snapshot := bs.state.Snapshot()`
 	bs.state.Prepare(tx.Hash(), blockHash, bs.txIndex)
 	receipt, _, err := core.ApplyTransaction(
@@ -72,6 +79,10 @@ func (bs *blockState) execTx(bc *core.BlockChain, config *eth.Config, chainConfi
 //
 // Returns the persisted Block.
 func (bs *blockState) persist(bc *core.BlockChain, db ethdb.Database) (ethTypes.Block, error) {
+	if bs.isInvalid == true {
+		return ethTypes.Block{}, fmt.Errorf("Cannot persist an invalid block %d", bs.header.Number.Int64())
+	}
+
 	rootHash, err := bs.state.Commit(false)
 	if err != nil {
 		return ethTypes.Block{}, err
@@ -88,10 +99,14 @@ func (bs *blockState) persist(bc *core.BlockChain, db ethdb.Database) (ethTypes.
 	return *block, nil
 }
 
-func (bs *blockState) updateBlockState(config *params.ChainConfig, parentTime uint64, numTx uint64) {
+func (bs *blockState) updateBlockState(config params.ChainConfig, blockTime uint64, numTx uint64) {
 	parentHeader := bs.parent.Header()
-	bs.header.Time = new(big.Int).SetUint64(parentTime).Uint64()
-	bs.header.Difficulty = ethash.CalcDifficulty(config, parentTime, parentHeader)
+	bs.header.Time = new(big.Int).SetUint64(blockTime).Uint64()
+	bs.header.Difficulty = ethash.CalcDifficulty(&config, blockTime, parentHeader)
 	bs.transactions = make([]*ethTypes.Transaction, 0, numTx)
 	bs.receipts = make([]*ethTypes.Receipt, 0, numTx)
+}
+
+func (bs *blockState) invalidate() {
+	bs.isInvalid = true
 }

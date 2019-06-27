@@ -12,9 +12,10 @@ import (
 	ethTypes "github.com/ethereum/go-ethereum/core/types"
 	tmtAbciTypes "github.com/tendermint/tendermint/abci/types"
 	tmtLog "github.com/tendermint/tendermint/libs/log"
+	"github.com/ethereum/go-ethereum/consensus/ethash"
 )
 
-//----------------------------------------------------------------------
+// ----------------------------------------------------------------------
 // EthState manages concurrent access to the intermediate blockState object
 // The eth tx pool fires TxPreEvent in a go-routine,
 // and the miner subscribes to this in another go-routine and processes the tx onto
@@ -40,7 +41,7 @@ func NewEthState(ethereum *eth.Ethereum, ethCfg *eth.Config, logger tmtLog.Logge
 	return &EthState{
 		ethereum:  ethereum,
 		ethConfig: ethCfg,
-		logger: logger,
+		logger:    logger,
 	}
 }
 
@@ -63,7 +64,7 @@ func (es *EthState) ExecuteTx(tx *ethTypes.Transaction) tmtAbciTypes.ResponseDel
 // Triggered by ABCI::Commit(), to persist changes introduced in latest block.
 //
 // Returns the persisted Block.
-func (es *EthState) Persist(receiver common.Address) (ethTypes.Block, error) {
+func (es *EthState) Persist(config params.ChainConfig, receiver common.Address) (ethTypes.Block, error) {
 	es.mtx.Lock()
 	defer es.mtx.Unlock()
 
@@ -72,7 +73,7 @@ func (es *EthState) Persist(receiver common.Address) (ethTypes.Block, error) {
 		return ethTypes.Block{}, err
 	}
 
-	err = es.resetBlockState(receiver)
+	err = es.resetBlockState(config, receiver)
 	if err != nil {
 		return ethTypes.Block{}, err
 	}
@@ -80,14 +81,14 @@ func (es *EthState) Persist(receiver common.Address) (ethTypes.Block, error) {
 	return block, err
 }
 
-func (es *EthState) ResetBlockState(receiver common.Address) error {
+func (es *EthState) ResetBlockState(config params.ChainConfig, receiver common.Address) error {
 	es.mtx.Lock()
 	defer es.mtx.Unlock()
 
-	return es.resetBlockState(receiver)
+	return es.resetBlockState(config, receiver)
 }
 
-func (es *EthState) resetBlockState(receiver common.Address) error {
+func (es *EthState) resetBlockState(config params.ChainConfig, receiver common.Address) error {
 	blockchain := es.ethereum.BlockChain()
 	bcState, err := blockchain.State()
 	if err != nil {
@@ -95,7 +96,7 @@ func (es *EthState) resetBlockState(receiver common.Address) error {
 	}
 
 	currentBlock := blockchain.CurrentBlock()
-	ethHeader := newBlockHeader(receiver, currentBlock)
+	ethHeader := newBlockHeader(config, receiver, currentBlock)
 
 	es.blockState = blockState{
 		header:       ethHeader,
@@ -108,11 +109,19 @@ func (es *EthState) resetBlockState(receiver common.Address) error {
 	return nil
 }
 
-func (es *EthState) UpdateBlockState(config *params.ChainConfig, parentTime uint64, numTx uint64) {
+func (es *EthState) UpdateBlockState(config params.ChainConfig, blockTime uint64, numTx uint64) error {
 	es.mtx.Lock()
 	defer es.mtx.Unlock()
 
-	es.blockState.updateBlockState(config, parentTime, numTx)
+	es.blockState.updateBlockState(config, blockTime, numTx)
+	bc := es.ethereum.BlockChain()
+	err := bc.Engine().VerifyHeader(bc, es.blockState.header, false)
+	if err != nil {
+		es.blockState.invalidate()
+		return err
+	}
+
+	return nil
 }
 
 func (es *EthState) GasLimit() *core.GasPool {
@@ -134,11 +143,13 @@ func (es *EthState) Pending() (*ethTypes.Block, *state.StateDB) {
 	), es.blockState.state.Copy()
 }
 
-func newBlockHeader(receiver common.Address, prevBlock *ethTypes.Block) *ethTypes.Header {
+func newBlockHeader(config params.ChainConfig, receiver common.Address, prevBlock *ethTypes.Block) *ethTypes.Header {
 	return &ethTypes.Header{
 		Number:     prevBlock.Number().Add(prevBlock.Number(), big.NewInt(1)),
 		ParentHash: prevBlock.Hash(),
 		GasLimit:   core.CalcGasLimit(prevBlock, prevBlock.GasLimit(), prevBlock.GasLimit()),
+		Difficulty: ethash.CalcDifficulty(&config, prevBlock.Time() + 1, prevBlock.Header()),
 		Coinbase:   receiver,
+		Time:       prevBlock.Time() + 1, // Adding min gap between consecutive blocks
 	}
 }
