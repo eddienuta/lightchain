@@ -11,7 +11,7 @@ describe('Workload', () => {
   let NEW_ACCOUNT_ADDR;
   const NEW_ACCOUNT_PASS = "password";
 
-  it("should create an account for testing purposes, not asserting", async () => {
+  it("should create an account for testing purposes", async () => {
     NEW_ACCOUNT_ADDR = await web3.eth.personal.newAccount(NEW_ACCOUNT_PASS);
     await web3.eth.personal.unlockAccount(NEW_ACCOUNT_ADDR, NEW_ACCOUNT_PASS, 1000);
 
@@ -28,7 +28,7 @@ describe('Workload', () => {
   });
 
   // // This Test is wasting 0.231 PHT from faucet account per execution
-  it("should return 1000 tx receipts whose state is 0x1", async () => {
+  it("should send 1000 successful parallel TXs", async () => {
     const weiBalancePreTxBN = web3.utils.toBN(await web3.eth.getBalance(ROOT_ACCOUNT));
     const weiAmountSentBN = convertPhtToWeiBN("0.1");
     const iterations = 1000;
